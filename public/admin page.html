@@ -641,20 +641,33 @@ img {
 
 @media (max-width: 1024px) {
     .ninety1 {
-        height: auto;
-        padding: 15px;
-        flex-direction: column;
-        gap: 15px;
-        align-items: flex-start;
-    }
+    height: 80px;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
 
-    .header-left,
-    .user-section {
-        width: 100%;
-        justify-content: space-between;
-        gap: 15px;
-        flex-wrap: wrap;
-    }
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#user-display-name{
+    font-size:12px;
+}
+
+#user-display-email{
+    font-size:10px;
+}
 
     .admin-wrapper {
         padding: 18px 14px;
