@@ -621,6 +621,130 @@ button.refresh-btn {
 .status-bad {
     color: #ef4444;
 }
+
+/* ===== RESPONSIVE FIX FOR MOBILE / TABLET / LAPTOP ===== */
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+@media (max-width: 1024px) {
+    .ninety1 {
+        height: auto;
+        padding: 15px;
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .header-left,
+    .user-section {
+        width: 100%;
+        justify-content: space-between;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .admin-wrapper {
+        padding: 18px 14px;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .stats-grid,
+    .live-slots-grid,
+    .sensor-health-grid,
+    .system-status-strip {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .booking-tools {
+        grid-template-columns: 1fr;
+    }
+
+    .booking-tools-wrapper {
+        padding: 0;
+    }
+
+    .admin-control-box {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #new-admin-email,
+    #add-admin-btn {
+        width: 100%;
+    }
+
+    .admin-row {
+        gap: 8px;
+        flex-wrap: wrap;
+        word-break: break-word;
+    }
+
+    .table-container {
+        padding: 12px;
+        overflow-x: auto;
+    }
+
+    .ops-table {
+        min-width: 850px;
+    }
+}
+
+@media (max-width: 600px) {
+    .admin-header h1 {
+        font-size: 24px;
+    }
+
+    .stats-grid,
+    .live-slots-grid,
+    .sensor-health-grid,
+    .system-status-strip {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-box,
+    .live-slot,
+    .sensor-card {
+        width: 100%;
+    }
+
+    .live-slot {
+        height: 80px;
+        font-size: 16px;
+    }
+
+    .stat-val {
+        font-size: 26px;
+    }
+
+    .table-actions {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    button.refresh-btn {
+        float: none;
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .ops-table {
+        min-width: 760px;
+    }
+}
 </style>
 </head>
 <body>
