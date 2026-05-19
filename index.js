@@ -637,16 +637,53 @@ app.post("/api/bookings/admin/release/:id", async (req, res) => {
         });
     }
 });
-// AUTO SYNC THINGSPEAK EVERY 16 SECONDS
+// AUTO SYNC THINGSPEAK EVERY 5 SECONDS
 setInterval(async () => {
     try {
-        await axios.get("http://localhost:5000/api/thingspeak/sync");
+        const url = `https://api.thingspeak.com/channels/${THINGSPEAK_CHANNEL_ID}/feeds.json?api_key=${THINGSPEAK_READ_API_KEY}&results=1`;
+
+        const response = await axios.get(url);
+        const latestFeed = response.data.feeds[0];
+
+        if (!latestFeed) return;
+
+        const sensorData = {
+            slot1: Number(latestFeed.field1) || 0,
+            slot2: Number(latestFeed.field2) || 0,
+            slot3: Number(latestFeed.field3) || 0,
+            slot4: Number(latestFeed.field4) || 0,
+            slot5: Number(latestFeed.field5) || 0,
+            sensorHealth: latestFeed.field6 || "11111",
+            nodeHealth: latestFeed.field7 || "0",
+            updatedAt: Date.now()
+        };
+
+        const existing = await SensorStatus.findOne();
+
+        if (existing) {
+            existing.slot1 = sensorData.slot1;
+            existing.slot2 = sensorData.slot2;
+            existing.slot3 = sensorData.slot3;
+            existing.slot4 = sensorData.slot4;
+            existing.slot5 = sensorData.slot5;
+            existing.sensorHealth = sensorData.sensorHealth;
+            existing.nodeHealth = sensorData.nodeHealth;
+            existing.updatedAt = Date.now();
+
+            await existing.save();
+        } else {
+            await SensorStatus.create(sensorData);
+        }
+
         console.log("ThingSpeak auto synced");
     } catch (err) {
         console.log("ThingSpeak auto sync failed");
     }
 }, 5000);
 // START SERVER
-app.listen(5000, () => {
-    console.log("Server running on http://localhost:5000");
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
 });
