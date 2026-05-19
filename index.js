@@ -90,9 +90,9 @@ app.post("/login", (req, res) => {
         }
     });
 });
-// TEST ROUTE
+// HOME PAGE ROUTE
 app.get("/", (req, res) => {
-    res.send("Backend is running 🚀");
+    res.sendFile(__dirname + "/public/login.html");
 });
 // SENSOR UPDATE API
 app.post("/api/sensors/update", async (req, res) => {
