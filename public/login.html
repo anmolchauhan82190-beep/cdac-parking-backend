@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CDAC Smart Parking System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+/* ===== BODY ===== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #e2e8f0;
+}
+
+/* ===== LOGIN CARD ===== */
+.login-container {
+    width: 380px;
+    background: rgba(17, 24, 39, 0.9);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    text-align: center;
+}
+
+/* ===== LOGO ===== */
+.logo {
+    width: 90px;
+    margin-bottom: 15px;
+	filter:
+    brightness(0) invert(1)
+    drop-shadow(0 0 6px rgba(255,255,255,0.35));
+}
+
+/* ===== TITLE ===== */
+h1 {
+    font-size: 20px;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+/* ===== INPUTS ===== */
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.input-group input {
+    width: 93%;
+    padding: 12px;
+    margin-top: 6px;
+    background: #020617;
+    border: 1px solid #374151;
+    color: white;
+    border-radius: 6px;
+    outline: none;
+}
+
+/* ===== BUTTON ===== */
+.login-btn {
+    width: 100%;
+    padding: 14px;
+    background: #2563eb;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    background: #1d4ed8;
+}
+
+/* ===== ERROR ===== */
+.error {
+    color: #f87171;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    margin-top: 20px;
+    font-size: 11px;
+    color: #64748b;
+}
+.input-error {
+    border: 1px solid #ef4444 !important;
+}
+
+.input-success {
+    border: 1px solid #22c55e !important;
+}
+.google-btn {
+    width: 100%;
+    padding: 14px;
+    background: white;
+    color: #111827;
+    border: none;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 12px;
+}
+
+.google-btn:hover {
+    background: #e5e7eb;
+}
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 45px;
+    box-sizing: border-box;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #94a3b8;
+    font-size: 16px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <!-- LOGO -->
+    <img src="images/main.png" class="logo" alt="CDAC Logo">
+
+    <!-- TITLE -->
+    <h1>CDAC Smart Parking System</h1>
+
+    <!-- FORM -->
+    <div class="input-group">
+        <label>Email</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+    </div>
+
+    <div class="input-group">
+			<label>Password</label>
+
+		<div class="password-wrapper">
+
+			<input type="password"
+               id="password"
+               placeholder="Enter your password"
+               required>
+
+			<span class="toggle-password"
+              onclick="togglePassword()">
+				<i class="fa fa-eye"></i>
+			</span>
+
+		</div>
+	</div>
+	<div style="display:flex; align-items:center; justify-content:space-between; margin-top:10px;">
+		 <label style="font-size:12px; color:#94a3b8;">
+			<input type="checkbox" id="remember"> Remember Me
+		</label>
+	</div>
+    <button class="login-btn" onclick="login()">LOGIN</button>
+		<button class="google-btn" id="google-login-btn">
+    <i class="fa fa-google"></i> Continue with Google
+</button>
+
+    <div class="error" id="error-msg"></div>
+
+    <div class="footer">
+        CDAC Mohali • Smart Parking System
+    </div>
+
+</div>
+
+<script>
+async function login() {
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const remember = document.getElementById('remember').checked;
+    const errorMsg = document.getElementById('error-msg');
+
+    email.classList.remove("input-error", "input-success");
+    password.classList.remove("input-error", "input-success");
+    errorMsg.innerText = "";
+
+    let valid = true;
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+    if (email.value.trim() === "" || !email.value.match(emailPattern)) {
+        email.classList.add("input-error");
+        valid = false;
+    } else {
+        email.classList.add("input-success");
+    }
+
+    if (password.value.length < 4) {
+        password.classList.add("input-error");
+        valid = false;
+    } else {
+        password.classList.add("input-success");
+    }
+
+    if (!valid) {
+        errorMsg.innerText = "Enter valid email and password";
+        return;
+    }
+
+    try {
+        const response = await fetch("http://localhost:5000/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: email.value,
+                password: password.value
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            localStorage.removeItem("loggedInUser");
+            sessionStorage.removeItem("loggedInUser");
+
+            if (remember) {
+                localStorage.setItem("loggedInUser", JSON.stringify(data.user));
+            } else {
+                sessionStorage.setItem("loggedInUser", JSON.stringify(data.user));
+            }
+
+            window.location.href = "./parkingdashboard.html";
+        } else {
+            errorMsg.innerText = data.message;
+        }
+    } catch (error) {
+        errorMsg.innerText = "Backend not connected. Start your server first.";
+        console.error(error);
+    }
+}
+
+function togglePassword() {
+
+    const passwordInput =
+        document.getElementById("password");
+
+    const icon =
+        document.querySelector(".toggle-password i");
+
+    if (passwordInput.type === "password") {
+
+        passwordInput.type = "text";
+
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+
+    } else {
+
+        passwordInput.type = "password";
+
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+    }
+}
+
+window.onload = function() {
+    const savedUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+    if (savedUser) {
+        document.getElementById("email").value = savedUser.email;
+        document.getElementById("remember").checked = true;
+    }
+};
+
+document.addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+        login();
+    }
+});
+</script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+
+import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup
+} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDO3WScq7kwTjEM7i2IrKQjqZNKAis8PHQ",
+    authDomain: "cdac-smart-parking.firebaseapp.com",
+    projectId: "cdac-smart-parking",
+    storageBucket: "cdac-smart-parking.firebasestorage.app",
+    messagingSenderId: "95742170416",
+    appId: "1:95742170416:web:eb56233737fb846b0464f5",
+    measurementId: "G-VKKY02M6QF"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+document.getElementById("google-login-btn").addEventListener("click", async () => {
+    try {
+        const result = await signInWithPopup(auth, provider);
+
+        const user = {
+            name: result.user.displayName,
+            email: result.user.email
+        };
+
+        localStorage.removeItem("loggedInUser");
+        sessionStorage.removeItem("loggedInUser");
+
+        localStorage.setItem("loggedInUser", JSON.stringify(user));
+
+        window.location.href = "./parkingdashboard.html";
+
+    } catch (error) {
+        alert(error.message);
+        console.error(error);
+    }
+});
+</script>
+
+</body>
+</html>

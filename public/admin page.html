@@ -1,0 +1,1292 @@
+<!doctype html>
+<html>
+<head>
+	<title>Admin CDAC Smart Praking </title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.hundered1 {
+    width: 100%;
+    float: left;
+     background: transparent;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    font-size: large;
+    font-family: sans-serif;
+}
+.ninety1 {
+    width: 100%;
+    max-width: none;
+    padding: 0 30px;
+    box-sizing: border-box;
+    margin: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 80px;
+}
+/* ---------------- TOP HEADER ---------------- */
+
+
+
+/* LEFT SECTION */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+/* LOGO */
+.thirtythree img {
+    width: 70px;
+    height: auto;
+	filter:
+    brightness(0) invert(1)
+    drop-shadow(0 0 6px rgba(255,255,255,0.35));
+}
+
+/* NAV BUTTONS */
+.thirtytree2,
+.thirtythree3 {
+
+    font-size: 20px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.thirtytree2:hover,
+.thirtythree3:hover {
+    color: #38bdf8;
+}
+
+/* ACTIVE ADMIN */
+.clicked-effect {
+    color: #ef4444;
+    text-decoration: underline;
+}
+
+/* RIGHT USER SECTION */
+.user-section {
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* NAME */
+#user-display-name {
+
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}
+
+/* EMAIL */
+#user-display-email {
+
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+/* LOGOUT */
+.logout-btn {
+
+    background: transparent;
+    border: 1px solid #334155;
+
+    color: #ef4444;
+
+    padding: 8px 14px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+
+    background: #ef4444;
+    color: white;
+}
+body {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #e2e8f0;
+}
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #e2e8f0;
+}
+
+.admin-wrapper {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+    padding: 25px 35px;
+    margin: 0;
+}
+
+.admin-header h1 {
+    font-size: 32px;
+    letter-spacing: 2px;
+    margin-top: 5px;
+}
+
+/* Stats Section */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.stat-box {
+    border: 1px solid #334155;
+    padding: 20px;
+    background: rgba(30, 41, 59, 0.7);
+    border-radius: 8px;
+	    color: #e2e8f0;
+}
+
+.stat-box label {
+    font-size: 10px;
+    color: #999;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.stat-val {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.green-text { color: #2ecc71; }
+.red-text { color: #e74c3c; }
+.stat-box {
+    transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-box:hover {
+    transform: translateY(-4px);
+    border-color: #38bdf8;
+    box-shadow: 0 8px 25px rgba(56, 189, 248, 0.25);
+}
+.stat-val {
+    margin-top: 10px;
+    font-size: 34px;
+    letter-spacing: 1px;
+}
+
+/* Table Section */
+.table-container {
+
+    width:100%;
+    box-sizing:border-box;
+
+    margin-top:40px;
+
+    background:rgba(15,23,42,0.55);
+
+    border:1px solid #334155;
+
+    border-radius:14px;
+
+    padding:20px;
+
+    overflow-x:auto;
+}
+
+.table-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+}
+
+.tabs span {
+    margin-right: 20px;
+    font-size: 12px;
+    color: #999;
+    cursor: pointer;
+}
+
+
+.status-tag {
+    background: #334155;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+.tabs span.active {
+    color: #38bdf8;
+    font-weight: bold;
+    border-bottom: 2px solid  #38bdf8;
+}
+
+.ops-table {
+
+    width:100%;
+
+    min-width:1100px;
+
+    table-layout:fixed;
+
+    border-collapse:collapse;
+
+    margin-top:20px;
+}
+.ops-table th {
+    text-align: left;
+    font-size: 11px;
+    color: #94a3b8;
+    padding: 15px;
+    border-bottom: 1px solid #334155;
+}
+
+.ops-table td {
+     padding: 28px 18px;
+
+    vertical-align: top;
+
+    line-height: 22px;
+    border-bottom: 1px solid #1e293b;
+    font-size: 13px;
+    color: #e2e8f0;
+}
+.ops-table th,
+.ops-table td {
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+.ops-table tr:hover {
+
+    background: rgba(51, 65, 85, 0.25);
+
+    transition: 0.3s;
+}
+
+.status-tag {
+    background: #334155;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+.admin-header h1 {
+    color: #f1f5f9;
+}
+
+.admin-header small {
+    color: #94a3b8;
+}
+.refresh-btn {
+    background: #0f172a;
+    color: white;
+    border: 1px solid #334155;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.refresh-btn:hover {
+    background: #38bdf8;
+    color: black;
+}
+.live-slots-section {
+    margin-top: 40px;
+}
+
+.live-slots-section h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.live-slots-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+}
+
+.live-slot {
+    height: 100px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    border: 1px solid #334155;
+
+    transition: 0.3s;
+}
+
+.live-slot:hover {
+    transform: translateY(-4px);
+}
+
+.free-slot {
+    background: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+}
+
+.occupied-slot {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+.release-btn {
+    background: #dc2626;
+    color: white;
+    border: none;
+    padding: 7px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.release-btn:hover {
+    background: #b91c1c;
+}
+button.refresh-btn {
+    float: right;
+    margin-top: -32px;
+}
+.sensor-health-section {
+    margin-top: 35px;
+}
+
+.sensor-health-section h2 {
+    font-size: 22px;
+    margin-bottom: 18px;
+    letter-spacing: 1px;
+}
+
+.sensor-health-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+}
+
+.sensor-card {
+    padding: 18px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #334155;
+    background: rgba(30, 41, 59, 0.7);
+}
+
+.sensor-online {
+    color: #22c55e;
+    border-color: #22c55e;
+}
+
+.sensor-offline {
+    color: #ef4444;
+    border-color: #ef4444;
+}
+
+#sensor-last-update {
+    margin-top: 12px;
+    color: #94a3b8;
+    font-size: 13px;
+}
+.manage-admin-section {
+
+    margin-top: 40px;
+}
+
+.manage-admin-section h2 {
+
+    font-size: 22px;
+
+    margin-bottom: 18px;
+}
+
+.admin-control-box {
+
+    display: flex;
+
+    gap: 15px;
+
+    align-items: center;
+}
+
+#new-admin-email {
+
+    flex: 1;
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    border: 1px solid #334155;
+
+    background: rgba(15, 23, 42, 0.8);
+
+    color: white;
+
+    font-size: 14px;
+}
+
+#add-admin-btn {
+
+    padding: 14px 22px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+#add-admin-btn:hover {
+
+    background: #1d4ed8;
+}
+
+#admin-message {
+
+    margin-top: 12px;
+
+    color: #38bdf8;
+
+    font-size: 14px;
+}
+.admin-list-box {
+    margin-top: 20px;
+    background: rgba(15, 23, 42, 0.55);
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 15px;
+}
+
+.admin-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #334155;
+    padding: 10px 0;
+}
+
+.remove-admin-btn {
+    background: #dc2626;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* OUTER WRAPPER */
+.booking-tools-wrapper{
+
+    width:100%;
+
+    padding:0 20px;
+
+    box-sizing:border-box;
+
+    margin:20px 0;
+}
+
+
+/* INNER SEARCH ROW */
+.booking-tools{
+
+    width:100%;
+
+    display:grid;
+
+    grid-template-columns:1fr 120px 160px;
+
+    gap:12px;
+
+    align-items:center;
+}
+
+
+/* SEARCH BOX */
+#booking-search{
+
+    width:100%;
+
+    height:45px;
+
+    padding:0 15px;
+
+    border:1px solid #334155;
+
+    border-radius:8px;
+
+    background:#0f172a;
+
+    color:white;
+
+    box-sizing:border-box;
+}
+
+
+/* SEARCH BUTTON */
+#search-booking-btn{
+
+    width:100%;
+
+    height:45px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+
+/* FILTER */
+#booking-filter{
+
+    width:100%;
+
+    height:45px;
+
+    border:1px solid #334155;
+
+    border-radius:8px;
+
+    padding:0 10px;
+
+    background:#0f172a;
+
+    color:white;
+
+    box-sizing:border-box;
+}
+.system-status-strip {
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.system-status-strip div {
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.status-ok {
+    color: #22c55e;
+}
+
+.status-bad {
+    color: #ef4444;
+}
+</style>
+</head>
+<body>
+	<div class="hundered1">
+		<div class="ninety1">
+			 <div class="header-left">
+
+        <div class="thirtythree">
+            <img class="new1" src="images/main.png">
+        </div>
+
+        <div class="thirtytree2">
+            <i class="fa fa-ticket"></i> Dashboard
+        </div>
+
+        <div class="thirtythree3 clicked-effect">
+            <i class="fa fa-shield"></i> Admin
+        </div>
+
+    </div>
+		  
+			<div class="user-section">
+				<div class="user-info">
+						<span id="user-display-name">Arpit Sharma</span>
+					   <small id="user-display-email">arpitsharma4552@gmail.com</small>
+				</div>
+					<div class="user-avatar">
+							<alt="Profile" style="width: 30px; border-radius: 50%;">
+					</div>
+					<button class="logout-btn"><i class="fa fa-sign-out"></i> LOGOUT</button>
+			</div>
+		</div>
+	</div>
+		<div class="admin-wrapper">
+    <header class="admin-header">
+        <small> ADMIN CONSOLE</small>
+        <h1><h1>SMART PARKING CONTROL PANEL</h1></h1>
+    </header>
+	
+
+    <!-- Summary Stats -->
+    <div class="stats-grid">
+
+    <div class="stat-box">
+        <label>TOTAL SLOTS</label>
+        <div class="stat-val" id="total-slots">5</div>
+    </div>
+
+    <div class="stat-box">
+        <label>AVAILABLE SLOTS</label>
+        <div class="stat-val green-text" id="available-bays">5</div>
+    </div>
+
+    <div class="stat-box">
+        <label>OCCUPIED SLOTS</label>
+        <div class="stat-val red-text" id="occupied-bays">0</div>
+    </div>
+
+    <div class="stat-box">
+        <label>ACTIVE BOOKINGS</label>
+        <div class="stat-val green-text" id="active-count">0</div>
+    </div>
+
+    <div class="stat-box">
+        <label>CANCELLED BOOKINGS</label>
+        <div class="stat-val red-text" id="cancelled-count">0</div>
+    </div>
+
+</div>
+	<div class="live-slots-section">
+
+			<h2>LIVE SLOT MONITOR</h2>
+
+		<div class="live-slots-grid">
+
+			<div class="live-slot free-slot" id="admin-slot-1">
+				SLOT 1
+			</div>
+
+			<div class="live-slot free-slot" id="admin-slot-2">
+					SLOT 2
+			</div>
+
+			<div class="live-slot free-slot" id="admin-slot-3">
+				SLOT 3
+			</div>
+
+			<div class="live-slot free-slot" id="admin-slot-4">
+				SLOT 4
+			</div>
+
+			<div class="live-slot free-slot" id="admin-slot-5">
+				SLOT 5
+			</div>
+
+		</div>
+
+	</div>
+	
+	<div class="sensor-health-section">
+    <h2>SENSOR HEALTH</h2>
+
+    <div class="sensor-health-grid">
+        <div class="sensor-card" id="sensor-health-1">Sensor 1<br>Checking...</div>
+        <div class="sensor-card" id="sensor-health-2">Sensor 2<br>Checking...</div>
+        <div class="sensor-card" id="sensor-health-3">Sensor 3<br>Checking...</div>
+        <div class="sensor-card" id="sensor-health-4">Sensor 4<br>Checking...</div>
+        <div class="sensor-card" id="sensor-health-5">Sensor 5<br>Checking...</div>
+    </div>
+
+    <p id="sensor-last-update">Last Update: Checking...</p>
+</div>
+	
+	<div class="system-status-strip">
+		<div id="backend-status">Backend: Checking...</div>
+		<div id="mongo-status">MongoDB: Checking...</div>
+		<div id="thingspeak-status">ThingSpeak: Checking...</div>
+		<div id="nodemcu-status">NodeMCU: Checking...</div>
+	</div>
+		<div class="manage-admin-section">
+
+			<h2>MANAGE MEMBERS</h2>
+
+			<div class="admin-control-box">
+
+				<input
+					type="email"
+					id="new-admin-email"
+					placeholder="Enter email to make admin">
+
+				<button id="add-admin-btn">
+					ADD MEMBERS
+				</button>
+				
+			</div>
+			<div class="admin-list-box">
+				<h3>Current Members </h3>
+				<div id="admin-list">Loading members....</div>
+			</div>
+			<div id="admin-message"></div>
+
+		</div><br>
+	<!-- Operations Table -->
+	<div class="tabs">
+		<span class="active">BOOKING RECORDS</span>
+	</div>
+        <button class="refresh-btn">
+			<i class="fa fa-refresh"></i>
+			Refresh Live Data
+		</button><hr>
+    </div>
+	
+	<div class="booking-tools-wrapper">
+
+		<div class="booking-tools">
+
+			<input type="text"
+			id="booking-search"
+			placeholder="Search by email, vehicle number, or slot">
+
+			<button id="search-booking-btn">
+				<i class="fa fa-search"></i> Search
+			</button>
+
+			<select id="booking-filter">
+
+				<option value="ALL">All Bookings</option>
+				<option value="ACTIVE">Active</option>
+				<option value="CANCELLED">Cancelled</option>
+
+			</select>
+
+		</div>
+
+	</div>
+
+    <table class="ops-table">
+        <thead>
+            <tr>
+                <th>SLOT</th>
+                <th>USER</th>
+                <th>VEHICLE</th>
+                <th>TIME & DATE</th>
+                <th>STATUS</th>
+				<th>ACTION</th>
+            </tr>
+        </thead>
+        <!-- THIS IS THE TBODY YOU NEED -->
+        <tbody id="admin-table-body">
+            <!-- JavaScript will automatically add rows here -->
+        </tbody>
+    </table>
+</div>
+<script>
+// ---------------- ADMIN ACCESS CONTROL ----------------
+const adminEmails = [
+    "chauhan82190@gmail.com",
+    "admin2@gmail.com",
+    "admin3@gmail.com",
+    "teacher@gmail.com",
+    "staff@gmail.com"
+];
+
+const user =
+    JSON.parse(localStorage.getItem("loggedInUser")) ||
+    JSON.parse(sessionStorage.getItem("loggedInUser"));
+
+if (!user) {
+    window.location.href = "login.html";
+}
+
+async function checkAdminPageAccess() {
+    try {
+        const response = await fetch(`/api/admin/check/${user.email}`);
+        const data = await response.json();
+
+        const isHardcodedAdmin = adminEmails.includes(user.email);
+        const isDatabaseAdmin = data.success && data.isAdmin;
+
+        if (!isHardcodedAdmin && !isDatabaseAdmin) {
+            alert("Access denied. Admin only.");
+            window.location.href = "parkingdashboard.html";
+        }
+
+    } catch (err) {
+        alert("Admin verification failed.");
+        window.location.href = "parkingdashboard.html";
+    }
+}
+
+checkAdminPageAccess();
+
+// ---------------- SHOW ADMIN USER ----------------
+document.getElementById("user-display-name").innerText = user.name;
+document.getElementById("user-display-email").innerText = user.email;
+
+// ---------------- NAVIGATION ----------------
+document.querySelector(".thirtytree2").addEventListener("click", function () {
+    window.location.href = "parkingdashboard.html";
+});
+
+// ---------------- LOGOUT ----------------
+document.querySelector(".logout-btn").addEventListener("click", function () {
+    localStorage.removeItem("loggedInUser");
+    sessionStorage.removeItem("loggedInUser");
+    window.location.href = "login.html";
+});
+
+// ---------------- LOAD BOOKING TABLE ----------------
+async function loadAdminTable() {
+
+    try {
+
+        const response =
+            await fetch("/api/bookings/all");
+
+        const data =
+            await response.json();
+
+        const tableBody =
+            document.getElementById("admin-table-body");
+
+        tableBody.innerHTML = "";
+
+        if (!data.success || data.bookings.length === 0) {
+
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="6">
+                        No booking records found
+                    </td>
+                </tr>
+            `;
+
+            return;
+        }
+
+        const searchText =
+            document.getElementById("booking-search")
+            .value
+            .toLowerCase();
+
+        const filterStatus =
+            document.getElementById("booking-filter")
+            .value;
+
+        let active = 0;
+        let cancelled = 0;
+
+        const filteredBookings =
+            data.bookings.filter(booking => {
+
+                const matchesSearch =
+
+                    booking.userName.toLowerCase().includes(searchText) ||
+
+                    booking.userEmail.toLowerCase().includes(searchText) ||
+
+                    booking.vehiclePlate.toLowerCase().includes(searchText) ||
+
+                    ("slot " + booking.slot)
+                    .toLowerCase()
+                    .includes(searchText);
+
+                const matchesFilter =
+
+                    filterStatus === "ALL" ||
+
+                    booking.status === filterStatus;
+
+                return matchesSearch && matchesFilter;
+
+            });
+
+        filteredBookings.forEach(booking => {
+
+            if (booking.status === "ACTIVE")
+                active++;
+
+            if (booking.status === "CANCELLED")
+                cancelled++;
+
+            const row = `
+
+            <tr>
+
+                <td>
+                    <b>Slot ${booking.slot}</b>
+                </td>
+
+                <td>
+                    ${booking.userName}<br>
+                    <small>${booking.userEmail}</small>
+                </td>
+
+                <td>
+                    ${booking.vehiclePlate}<br>
+                    <small>${booking.vehicleType}</small>
+                </td>
+
+                <td>
+                    ${booking.startTime}<br>
+                    <small>${booking.endTime}</small>
+                </td>
+
+                <td>
+                    <span class="status-tag">
+                        ${booking.status}
+                    </span>
+                </td>
+
+                <td>
+
+                    ${
+                        booking.status === "ACTIVE"
+                        ?
+
+                        `<button class="release-btn"
+                         onclick="forceRelease('${booking._id}')">
+                         RELEASE
+                         </button>`
+
+                        : "-"
+
+                    }
+
+                </td>
+
+            </tr>
+            `;
+
+            tableBody.innerHTML += row;
+
+        });
+
+        document.getElementById("active-count").innerText =
+            active;
+
+        document.getElementById("cancelled-count").innerText =
+            cancelled;
+
+    }
+
+    catch(err) {
+
+        console.log(err);
+
+    }
+}
+
+document.getElementById("search-booking-btn")
+.addEventListener("click", loadAdminTable);
+
+document.getElementById("booking-search")
+.addEventListener("keypress", function(e){
+
+    if(e.key==="Enter"){
+        loadAdminTable();
+    }
+
+});
+
+document.getElementById("booking-filter")
+.addEventListener("change", loadAdminTable);
+
+	// ---------------- LIVE SLOT MONITOR ----------------
+async function loadLiveSlots() {
+    try {
+        const sensorResponse = await fetch("/api/sensors/status");
+        const sensorData = await sensorResponse.json();
+
+        const bookingResponse = await fetch("/api/bookings/active");
+        const bookingData = await bookingResponse.json();
+
+        const bookedSlots = bookingData.success
+            ? bookingData.bookings.map(b => Number(b.slot))
+            : [];
+
+        let sensorOccupiedCount = 0;
+let activeBookingCount = bookedSlots.length;
+
+for (let i = 1; i <= 5; i++) {
+    const slotBox = document.getElementById(`admin-slot-${i}`);
+
+    const sensorOccupied = sensorData[`slot${i}`] == 1;
+    const manuallyBooked = bookedSlots.includes(i);
+
+    if (sensorOccupied) {
+        sensorOccupiedCount++;
+
+        slotBox.classList.remove("free-slot");
+        slotBox.classList.add("occupied-slot");
+        slotBox.innerHTML = `SLOT ${i}<br>OCCUPIED`;
+    }
+    else if (manuallyBooked) {
+        slotBox.classList.remove("free-slot");
+        slotBox.classList.add("occupied-slot");
+        slotBox.innerHTML = `SLOT ${i}<br>BOOKED`;
+    }
+    else {
+        slotBox.classList.remove("occupied-slot");
+        slotBox.classList.add("free-slot");
+        slotBox.innerHTML = `SLOT ${i}<br>FREE`;
+    }
+}
+
+		const unavailableSlots = new Set();
+
+		for (let i = 1; i <= 5; i++) {
+		if (sensorData[`slot${i}`] == 1) {
+        unavailableSlots.add(i);
+    }
+}
+
+		bookedSlots.forEach(slot => unavailableSlots.add(slot));
+
+		document.querySelectorAll(".stat-val")[0].innerText = 5;
+		document.getElementById("available-bays").innerText = 5 - unavailableSlots.size;
+		document.getElementById("occupied-bays").innerText = sensorOccupiedCount;
+		document.getElementById("active-count").innerText = activeBookingCount;
+
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+// ---------------- ADMIN FORCE RELEASE ----------------
+async function forceRelease(bookingId) {
+    if (!confirm("Are you sure you want to release this booking?")) {
+        return;
+    }
+
+    const response = await fetch(`/api/bookings/admin/release/${bookingId}`, {
+        method: "POST"
+    });
+
+    const data = await response.json();
+
+    alert(data.message);
+
+    loadAdminTable();
+    loadLiveSlots();
+}
+
+// ---------------- REFRESH BUTTON ----------------
+document.querySelector(".refresh-btn").addEventListener("click", function () {
+    loadAdminTable();
+    loadLiveSlots();
+	loadSensorHealth();
+});
+// ---------------- ADD ADMIN FROM ADMIN PAGE ----------------
+document.getElementById("add-admin-btn").addEventListener("click", async function () {
+
+    const emailInput = document.getElementById("new-admin-email");
+    const messageBox = document.getElementById("admin-message");
+
+    const email = emailInput.value.trim();
+
+    if (!email || !email.includes("@")) {
+        messageBox.innerText = "Enter a valid email";
+        return;
+    }
+
+    const response = await fetch("/api/admin/add", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email: email })
+    });
+
+    const data = await response.json();
+
+    messageBox.innerText = data.message;
+
+    if (data.success) {
+        emailInput.value = "";
+    }
+});
+
+async function loadAdmins() {
+    const hardcodedAdmins = [
+        "chauhan82190@gmail.com",
+        "admin2@gmail.com",
+        "admin3@gmail.com",
+        "teacher@gmail.com",
+        "staff@gmail.com"
+    ];
+
+    const response = await fetch("/api/admin/list");
+    const data = await response.json();
+
+    const adminList = document.getElementById("admin-list");
+    adminList.innerHTML = "";
+
+    hardcodedAdmins.forEach(email => {
+        adminList.innerHTML += `
+            <div class="admin-row">
+                <span>${email}</span>
+                <span style="color:#22c55e;">LOCKED</span>
+            </div>
+        `;
+    });
+
+    if (data.success) {
+        data.admins.forEach(admin => {
+            adminList.innerHTML += `
+                <div class="admin-row">
+                    <span>${admin.email}</span>
+                    <button class="remove-admin-btn" onclick="removeAdmin('${admin._id}')">
+                        Remove
+                    </button>
+                </div>
+            `;
+        });
+    }
+}
+
+async function removeAdmin(id) {
+    if (!confirm("Remove this admin?")) return;
+
+    const response = await fetch(`/api/admin/remove/${id}`, {
+        method: "DELETE"
+    });
+
+    const data = await response.json();
+    alert(data.message);
+
+    loadAdmins();
+}
+// ---------------- PAGE START ----------------
+window.onload = function () {
+    loadAdminTable();
+    loadLiveSlots();
+	loadAdmins();
+	loadSensorHealth();
+	loadSystemHealth();
+};
+
+setInterval(loadLiveSlots, 3000);
+setInterval(loadSensorHealth, 5000);
+setInterval(loadAdminTable, 5000);
+setInterval(loadSystemHealth, 5000);
+
+async function loadSensorHealth() {
+
+    try {
+
+        const response =
+            await fetch("/api/sensors/status");
+
+        const data =
+            await response.json();
+
+        const sensorHealth =
+            data.sensorHealth || "00000";
+
+        for (let i = 1; i <= 5; i++) {
+
+            const card =
+                document.getElementById(`sensor-health-${i}`);
+
+            const status =
+                sensorHealth[i - 1];
+
+            card.classList.remove(
+                "sensor-online",
+                "sensor-offline"
+            );
+
+            if (status === "1") {
+
+                card.classList.add("sensor-online");
+
+                card.innerHTML = `
+                    Sensor ${i}<br>
+                    Online
+                `;
+
+            } else {
+
+                card.classList.add("sensor-offline");
+
+                card.innerHTML = `
+                    Sensor ${i}<br>
+                    Fault Detected
+                `;
+            }
+        }
+
+        document.getElementById("sensor-last-update").innerText =
+            `Last Update: ${new Date().toLocaleString()}`;
+
+    } catch (err) {
+
+        console.log(err);
+    }
+}
+
+async function loadSystemHealth() {
+    try {
+        const response = await fetch("/api/system/health");
+        const data = await response.json();
+
+        updateStatusBox("backend-status", "Backend", data.backend === "ONLINE");
+        updateStatusBox("mongo-status", "MongoDB", data.mongodb === "CONNECTED");
+        updateStatusBox("thingspeak-status", "ThingSpeak", data.thingspeak === "CONNECTED");
+        updateStatusBox("nodemcu-status", "NodeMCU", data.nodemcu === "CONNECTED");
+
+    } catch (err) {
+        updateStatusBox("backend-status", "Backend", false);
+        updateStatusBox("mongo-status", "MongoDB", false);
+        updateStatusBox("thingspeak-status", "ThingSpeak", false);
+        updateStatusBox("nodemcu-status", "NodeMCU", false);
+    }
+}
+
+function updateStatusBox(id, label, isOk) {
+    const box = document.getElementById(id);
+
+    box.classList.remove("status-ok", "status-bad");
+    box.classList.add(isOk ? "status-ok" : "status-bad");
+
+    box.innerText = `${label}: ${isOk ? "Online" : "Offline"}`;
+}
+</script>
+</body>
+
+</html>

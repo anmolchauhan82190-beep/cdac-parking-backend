@@ -1,0 +1,1115 @@
+<!Doctype html>
+<html>
+<head>
+<title>CDAC Smart Parking System</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.hundered1 {
+    width: 100%;
+    float: left;
+    border: 1px solid gray;
+    font-size: large;
+    font-family: sans-serif;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+	
+}
+.ninety1{
+	width:95%;
+    margin:0 auto;
+	display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    height:90px;
+}
+.thirtythree {
+    float:none;
+}
+img.new1 {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-left: 0px;
+    margin-top: 0px;
+	filter:
+    brightness(0) invert(1)
+    drop-shadow(0 0 6px rgba(255,255,255,0.35));
+}
+.thirtytree2 {
+    width: 20%;
+	float:none;
+}
+.thirtytree2 {
+    margin-left: 20px;
+    margin-top: 16px;
+    font-size: x-large;
+}
+.thirtythree3 {
+    float: none;
+    margin-top: 16px;
+    margin-right: 0;
+    font-size: x-large;
+}
+/* This ensures only Dashboard changes when hovered */
+.thirtytree2:hover {
+    color: blue !important; /* Choose your hover color */
+    cursor: pointer;
+}
+
+/* This ensures only Admin changes when hovered */
+.thirtythree3:hover {
+    color: blue !important;
+    cursor: pointer;
+}
+
+/* This is the effect that appears ONLY when Admin is clicked */
+.clicked-effect {
+    color: blue !important;
+    font-weight: bold;
+}
+/* USER PROFILE AREA */
+.user-section{
+
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+
+    gap:14px;
+
+    margin-left:auto;
+
+    width:350px;
+	font-family:sans-serif;
+}
+
+.user-info {
+
+    width:230px;
+
+    text-align:right;
+
+    overflow:hidden;
+
+    flex-shrink:0;
+}
+
+#user-display-name {
+    display: block;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 20px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#user-display-email {
+    display: block;
+    color: white;
+    font-size: 12px;
+    line-height: 16px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* LOGOUT BUTTON */
+.logout-btn {
+    background: transparent;
+    border: 1px solid #444;
+    color: red;
+    padding: 5px 12px;
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-transform: uppercase;
+}
+
+.logout-btn:hover {
+    background: blue;
+    border-color: black;
+    transition: 0.3s;
+}
+
+.hundered2 {
+    margin-top: 0px;
+    float: left;
+    width: 100%;
+    border: none;
+    font-family: sans-serif;
+    height: 179px;
+}
+.ninety {
+    width: 95%;
+    margin: 30px auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+p {
+    margin-left: 13px;
+    margin-top: 9px;
+}
+p.new1 {
+    font-size: xx-large;
+}
+.twentytwo,
+.twentytwo1,
+.twentytwo2,
+.twentytwo3 {
+    flex: 1;
+    height: 100px;
+    padding: 15px;
+    box-sizing: border-box;
+    background-color: #1f2933;
+    border: 1px solid #374151;
+    color: #e5e7eb;
+    border-radius: 10px;
+}
+.hundered3 {
+    float: left;
+    width: 50%;
+    min-height: 430px;
+    font-family: sans-serif;
+    border: none;
+}
+
+.ninety3 {
+    margin: 0 auto;
+    width: 92%;
+    margin-top: 20px;
+}
+
+.slots-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-top: 25px;
+}
+
+.fifteen {
+    width: 100%;
+    height: 165px;
+    border-radius: 16px;
+    padding: 14px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s, border 0.2s, box-shadow 0.2s;
+    user-select: none;
+    box-sizing: border-box;
+}
+
+.fifteen:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+}
+
+.fifteen:active {
+    transform: scale(0.96);
+}
+
+p.slot {
+    font-size: 17px;
+    margin: 0;
+}
+
+p.new2 {
+    font-size: 54px;
+    margin: 15px 0 5px 0;
+    line-height: 1;
+}
+
+.status-label {
+    font-weight: bold;
+    font-size: 17px;
+    margin-top: 10px;
+}
+
+.free-bg {
+    background-color: #16a34a !important;
+    color: white !important;
+    border: 1px solid #166534;
+}
+
+.booked-bg {
+    background-color: #dc2626 !important;
+    color: white !important;
+    border: 1px solid #7f1d1d;
+}
+
+.slot-info-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.18);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.slot-info-btn:hover {
+    background: white;
+    color: #111827;
+}
+.hundere4 {
+    float: left;
+    border: 1px solid grey;
+    width: 49.69%;
+    height: 600px;
+	font-family: sans-serif;
+	   padding: 20px;
+    margin-top:20px;
+}
+.hundere4 {
+    margin-top: -1px;
+}
+.ninety4 {
+    margin: 0 auto;
+    width: 90%;
+    margin-top: 11px;
+}button.new5 {
+    float: right;
+    margin-top: -4px;
+	width:80px;
+}
+button.new5:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+    border-color: #999;
+}
+
+button.new5:active {
+    background-color: #ddd;
+    transform: translateY(1px); /* Simple click effect */
+}
+.selected.slot {
+    float: left;
+    border: 1px solid black;
+    block-size: 100px;
+    width: 100%;
+	padding: 10px;
+    background-color: #fff;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+	margin-top:10px;
+}
+.console-input {
+    display: block;
+    width: 100%;
+    background-color: #262626; /* Dark background */
+    color: white;
+    border: 1px solid #444;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 4px;
+    font-family: inherit;
+}
+
+/* This makes the calendar icon inside the input white so it's visible */
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}
+/* Vehicle Type dropdown styling - set to 40% as requested */
+.vehicle-dropdown {
+    width: 40% !important;
+    text-transform: uppercase;
+}
+.new5.type-section {
+    margin-top: 20px;
+}
+
+/* The Confirm Button - Black text on White background */
+.main-confirm-btn {
+    width: 104%;
+    background-color: white;
+    color: black;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.3s;
+	border:1px solid black;
+}
+
+.main-confirm-btn:hover {
+    background-color: red; /* Turns green on hover */
+    color: white;
+}
+
+/* Matching the input styling from your reference */
+.console-input {
+    display: block;
+    background-color: #1a1a1a;
+    color: white;
+    border: 1px solid #333;
+    padding: 12px;
+    margin-top: 8px;
+    border-radius: 2px;
+}
+.new5.plate-section {
+    margin-top: 20px;
+}
+.new5.endtime {
+    margin-top: 20px;
+}
+
+
+/* ---------------- DARK THEME ---------------- */
+body {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background:
+    radial-gradient(circle at top,
+    #1e3a8a 0%,
+    #0f172a 45%,
+    #020617 100%);
+
+    background-attachment: fixed;
+    color: #e5e7eb;
+}
+
+/* Top Header */
+.hundered1 {
+    background-color:  rgba(15, 23, 42, 0.88);
+    border: none;
+}
+
+/* Stats Section */
+.hundered2 {
+    background-color:  transparent;
+    border: none;
+}
+
+.twentytwo,
+.twentytwo1,
+.twentytwo2,
+.twentytwo3 {
+     background: rgba(30, 41, 59, 0.72);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter: blur(10px);
+
+    color: #e5e7eb;
+
+    border-radius: 14px;
+
+    box-shadow:
+    0 4px 20px rgba(0,0,0,0.28),
+    0 0 12px rgba(59,130,246,0.08);
+
+    transition: all 0.3s ease;
+}
+.twentytwo:hover,
+.twentytwo1:hover,
+.twentytwo2:hover,
+.twentytwo3:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+    0 8px 24px rgba(0,0,0,0.38),
+    0 0 18px rgba(59,130,246,0.18);
+
+    border-color: rgba(96,165,250,0.35);
+}
+
+/* Parking Slots Section */
+.hundered3 {
+    background-color: transparent;
+    border: none;
+}
+
+.fifteen,
+.fifteen,
+.fifteen,
+.fifteen,
+.fifteen {
+    background-color: #1f2933;
+    border: 1px solid #374151;
+    color: #e5e7eb;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+/* Hover effect */
+.fifteen:hover,
+.fifteen1:hover,
+.fifteen2:hover,
+.fifteen3:hover,
+.fifteen4:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+/* Free (Professional Green) */
+.free-bg {
+    background-color: #16a34a !important;
+    border: 1px solid #166534;
+	text-align:justify;
+}
+
+/* Booked (Soft Red) */
+.booked-bg {
+    background-color: #dc2626 !important;
+    border: 1px solid #7f1d1d;
+}
+
+/* Reservation Console */
+.hundere4 {
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+
+/* Console Box */
+.selected.slot {
+    background-color: transparent;
+    border: 1px solid #374151;
+    color: #e5e7eb;
+    border-radius: 8px;
+}
+
+/* Inputs */
+.console-input {
+    background-color: #020617;
+    border: 1px solid #374151;
+    color: #e5e7eb;
+}
+
+/* Button */
+.main-confirm-btn {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+}
+
+.main-confirm-btn:hover {
+    background-color: #1d4ed8;
+}
+
+/* Logout */
+.logout-btn {
+    border: 1px solid #374151;
+    color: #f87171;
+}
+
+.logout-btn:hover {
+    background-color: #1f2933;
+}
+
+/* Text tweaks */
+p, span {
+    color: #e5e7eb;
+}
+
+.thirtythree3 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.thirtythree3 a:hover {
+    color: #2563eb;
+}
+input#start-time-input {
+    width: 100%;
+}
+input#end-time-input {
+    width: 100%;
+}
+input#plate-input {
+    width: 100%;
+}
+button#confirm-btn {
+    width: 100%;
+}
+button#cancel-btn {
+    width: 100%;
+}
+#cancel-btn {
+    margin-bottom: 0px;
+}
+.slot-popup {
+    display: none;
+    position: absolute;
+    background: #111827;
+    color: white;
+    border: 1px solid #38bdf8;
+    border-radius: 10px;
+    padding: 12px;
+    width: 220px;
+    z-index: 9999;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.45);
+    font-size: 14px;
+    line-height: 1.5;
+}
+.cdac-map-box {
+    width: 100%;
+    margin-top: 18px;
+    background: rgba(15, 23, 42, 0.85);
+    padding: 12px;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+.cdac-map-box h3 {
+    color: white;
+    margin-bottom: 10px;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
+.cdac-map-box iframe {
+    height: 170px;
+    width: 100%;
+    border: 0;
+    border-radius: 10px;
+}
+.cdac-map-box {
+    margin-bottom: 35px;
+}
+
+</style>
+</head>
+<body>
+
+     <div class="hundered1">
+			<div class="ninety1">
+				<div class="thirtythree"> <img class="new1" src="images/main.png"> </div>
+				<div class="thirtytree2"><i class="fa fa-ticket" aria-hidden="true"></i> Dashboard </div>
+				<div class="thirtythree3" onclick="window.location.href='admin page.html'">
+						<i class="fa fa-shield"></i> Admin
+				</div>
+				<div class="user-section">
+					<div class="user-info">
+						<span id="user-display-name">Arpit Sharma</span>
+					   <small id="user-display-email">arpitsharma4552@gmail.com</small>
+					</div>
+				
+					<button class="logout-btn"><i class="fa fa-sign-out"></i> LOGOUT</button>
+				</div>
+			</div>
+	 </div>
+		<div class="hundered2">
+			<div class="ninety">
+				<div class="twentytwo"> <p> Total Slots </p>
+				<p class="new1"id="total-slots">5</p></div>
+				<div class="twentytwo1"> <p> Available Slots </p>
+				<p class="new1" id="available-slots">5</p></div>
+				<div class="twentytwo2"> <p> OCCUPIED </p>
+				<p class="new1" id="occupied-slots">0</p></div>
+				<div class="twentytwo3"> <p> MY ACTIVE </p>
+				<p class="new1" id="my-active-slots">0</p></div>
+			</div>
+		</div>
+	<div class="hundered3">
+		<div class="ninety3">
+			<h1>Parking Slots</h1>
+
+			<div class="slots-container">
+				<div class="fifteen" id="box-1">
+					<button class="slot-info-btn" onclick="showSlotInfo(1, event)">i</button>
+					<p class="slot">Slot</p>
+					<p class="new2">01</p>
+					<p class="status-label" id="status-1">Loading...</p>
+				</div>
+
+				<div class="fifteen" id="box-2">
+					<button class="slot-info-btn" onclick="showSlotInfo(2, event)">i</button>
+					<p class="slot">Slot</p>
+					<p class="new2">02</p>
+					<p class="status-label" id="status-2">Loading...</p>
+				</div>
+
+				<div class="fifteen" id="box-3">
+					<button class="slot-info-btn" onclick="showSlotInfo(3, event)">i</button>
+					<p class="slot">Slot</p>
+					<p class="new2">03</p>
+					<p class="status-label" id="status-3">Loading...</p>
+				</div>
+
+				<div class="fifteen" id="box-4">
+					<button class="slot-info-btn" onclick="showSlotInfo(4, event)">i</button>
+					<p class="slot">Slot</p>
+					<p class="new2">04</p>
+					<p class="status-label" id="status-4">Loading...</p>
+				</div>
+
+				<div class="fifteen" id="box-5">
+					<button class="slot-info-btn" onclick="showSlotInfo(5, event)">i</button>
+					<p class="slot">Slot</p>
+					<p class="new2">05</p>
+					<p class="status-label" id="status-5">Loading...</p>
+				</div>
+			</div>
+			<div class="cdac-map-box">
+
+    <h3>CDAC Smart Parking Location</h3>
+
+    <iframe
+        src="https://maps.google.com/maps?q=CDAC%20Mohali&t=&z=15&ie=UTF8&iwloc=&output=embed"
+        width="100%"
+        height="220"
+        style="border:0;border-radius:12px;"
+        allowfullscreen=""
+        loading="lazy">
+    </iframe>
+
+</div>
+		</div>
+	</div>
+	<div class="hundere4">
+		<div class="ninety4">
+			<div class="new3 reserve">Reservation Console
+				<button class="new5" id="clear-btn">clear</button><hr>
+			</div>
+			<div class="selected slot" id="display-selected">Selected Slot 
+				<br>(click on green slot to select the slot)
+			</div>
+			<div class="new5 starttime">
+              <i class="fa fa-calendar-o" aria-hidden="true"></i> Start time<br>
+             <input type="datetime-local" id="start-time-input" class="console-input">
+			</div>
+
+			<div class="new5 endtime">
+				<i class="fa fa-clock-o" aria-hidden="true"></i> End time<br>
+				<input type="datetime-local" id="end-time-input" class="console-input">
+			</div>
+			<div class="new5 plate-section">
+				<i class="fa fa-id-card-o" aria-hidden="true"></i> Vehicle Plate
+				<input type="text" id="plate-input" class="console-input" placeholder="E.G. HP-37-A-1234">
+			</div>
+
+			<div class="new5 type-section">
+					<i class="fa fa-car" aria-hidden="true"></i> Vehicle Type
+				<select id="type-select" class="console-input vehicle-dropdown">
+					<option value="CAR">CAR</option>
+					<option value="BIKE">BIKE</option>
+				</select>
+			</div>
+
+			<button id="confirm-btn" class="main-confirm-btn">CONFIRM BOOKING</button>
+			<button id="cancel-btn" class="main-confirm-btn"
+					style="background:#dc2626;margin-top:10px;">
+						CANCEL BOOKING
+			</button>
+			
+			
+			
+			
+		</div>
+	</div>
+	
+	
+<script>
+// ---------------- USER + NAV ----------------
+const dash = document.querySelector('.thirtytree2');
+const admin = document.querySelector('.thirtythree3');
+
+admin.addEventListener('click', function() {
+    this.classList.add('clicked-effect');
+    dash.classList.remove('clicked-effect');
+});
+
+dash.addEventListener('click', function() {
+    admin.classList.remove('clicked-effect');
+});
+
+document.querySelector('.logout-btn').addEventListener('click', function() {
+    if(confirm("Are you sure you want to logout?")) {
+        window.location.href = "login.html";
+    }
+});
+
+// ---------------- TIME AUTO SET ----------------
+function setAutomaticTiming() {
+    const now = new Date();
+    const tzOffset = now.getTimezoneOffset() * 60000;
+    const localISOTime = new Date(now - tzOffset).toISOString().slice(0, 16);
+
+    document.getElementById('start-time-input').value = localISOTime;
+
+    const oneHourLater = new Date(now.getTime() + (60 * 60 * 1000) - tzOffset);
+    document.getElementById('end-time-input').value = oneHourLater.toISOString().slice(0, 16);
+}
+window.onload = setAutomaticTiming;
+
+// ---------------- THINGSPEAK CONFIG ----------------
+const channelID = "YOUR_CHANNEL_ID";
+const readKey = "YOUR_READ_API_KEY";
+
+// ---------------- SLOT LOGIC ----------------
+let currentSelectedSlot = null;
+
+for (let i = 1; i <= 5; i++) {
+    const slot = document.getElementById(`box-${i}`);
+    const status = document.getElementById(`status-${i}`);
+
+    // SET DEFAULT
+    slot.classList.add('free-bg');
+    status.innerText = "Free";
+    slot.style.cursor = "pointer";
+
+    slot.addEventListener('click', function () {
+
+        // If slot is occupied by real sensor, user cannot select it
+        if (slot.getAttribute("data-sensor") === "true") {
+            alert("This slot is occupied by vehicle sensor and cannot be booked.");
+            return;
+        }
+
+        // If slot is manually booked, allow selection only for cancel
+        if (slot.classList.contains('booked-bg')) {
+            for (let j = 1; j <= 5; j++) {
+                document.getElementById(`box-${j}`).style.border = "1px solid black";
+            }
+
+            slot.style.border = "3px solid yellow";
+
+            document.getElementById('display-selected').innerHTML =
+                `Selected Booked Slot: <b>0${i}</b><br>You can cancel this booking.`;
+
+            currentSelectedSlot = i;
+            return;
+        }
+
+        // Free slot selection for booking
+        for (let j = 1; j <= 5; j++) {
+            document.getElementById(`box-${j}`).style.border = "1px solid black";
+        }
+
+        slot.style.border = "3px solid blue";
+
+        document.getElementById('display-selected').innerHTML =
+            `Selected Slot: <b>0${i}</b>`;
+
+        currentSelectedSlot = i;
+    });
+}
+// ---------------- FETCH REAL-TIME DATA FROM BACKEND ----------------
+async function updateRealTimeSlots() {
+    try {
+        const sensorResponse = await fetch("/api/sensors/status");
+        const sensorData = await sensorResponse.json();
+
+        const bookingResponse = await fetch("/api/bookings/active");
+        const bookingData = await bookingResponse.json();
+
+        const bookedSlots = bookingData.success
+            ? bookingData.bookings.map(booking => Number(booking.slot))
+            : [];
+
+        let occupiedCounter = 0;
+
+        for (let i = 1; i <= 5; i++) {
+            const sensorOccupied = sensorData[`slot${i}`] == 1;
+            const manuallyBooked = bookedSlots.includes(i);
+
+            const slot = document.getElementById(`box-${i}`);
+            const status = document.getElementById(`status-${i}`);
+
+            if (sensorOccupied || manuallyBooked) {
+                slot.classList.add("booked-bg");
+                slot.classList.remove("free-bg");
+
+                slot.setAttribute("data-locked", "true");
+
+                status.innerText = sensorOccupied ? "Occupied" : "Booked";
+                occupiedCounter++;
+            } else {
+                slot.classList.add("free-bg");
+                slot.classList.remove("booked-bg");
+
+                slot.removeAttribute("data-locked");
+
+                status.innerText = "Free";
+            }
+        }
+
+        document.getElementById("occupied-slots").innerText = occupiedCounter;
+        document.getElementById("available-slots").innerText = 5 - occupiedCounter;
+
+    } catch (error) {
+        console.error("Backend live status fetch error:", error);
+    }
+}
+ updateRealTimeSlots();
+setInterval(updateRealTimeSlots, 3000);
+
+// ---------------- CONFIRM BOOKING ----------------
+document.getElementById('confirm-btn').addEventListener('click', async function () {
+    const plate = document.getElementById('plate-input').value;
+	const vehicleType = document.getElementById('type-select').value;
+const startTime = document.getElementById('start-time-input').value;
+const endTime = document.getElementById('end-time-input').value;
+
+	const loggedInUser =
+		JSON.parse(localStorage.getItem("loggedInUser")) ||
+		JSON.parse(sessionStorage.getItem("loggedInUser"));
+
+    if (!currentSelectedSlot || plate === "") {
+        alert("Select slot + enter plate number");
+        return;
+    }
+	const bookingResponse = await fetch("/api/bookings/create", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        slot: currentSelectedSlot,
+        vehiclePlate: plate,
+        vehicleType: vehicleType,
+        userName: loggedInUser?.name || "Unknown User",
+        userEmail: loggedInUser?.email || "unknown@gmail.com",
+        startTime: startTime,
+        endTime: endTime
+    })
+});
+
+const bookingData = await bookingResponse.json();
+
+if (!bookingData.success) {
+    alert(bookingData.message);
+    return;
+}
+
+    const slot = document.getElementById(`box-${currentSelectedSlot}`);
+    const status = document.getElementById(`status-${currentSelectedSlot}`);
+
+    slot.classList.remove('free-bg');
+    slot.classList.add('booked-bg');
+    status.innerText = "Booked";
+
+    slot.style.border = "1px solid black";
+
+    // ✅ UPDATE COUNTERS (ADDED)
+    let occupied = parseInt(document.getElementById('occupied-slots').innerText);
+    let available = parseInt(document.getElementById('available-slots').innerText);
+    let myActive = parseInt(document.getElementById('my-active-slots').innerText);
+
+    document.getElementById('occupied-slots').innerText = occupied + 1;
+    document.getElementById('available-slots').innerText = available - 1;
+    document.getElementById('my-active-slots').innerText = myActive + 1;
+
+    alert(`Slot ${currentSelectedSlot} booked`);
+
+    currentSelectedSlot = null;
+});
+// ---------------- SLOT INFO POPUP ----------------
+async function showSlotInfo(slotNumber, event) {
+
+    event.stopPropagation();
+
+    const popup = document.getElementById("slot-popup");
+    const slotElement = document.getElementById(`box-${slotNumber}`);
+
+    try {
+
+        const response = await fetch(`/api/bookings/slot/${slotNumber}`);
+        const data = await response.json();
+
+        let html = "";
+		const imagePath = `/images/slot${slotNumber}.jpeg`;
+
+        if (slotElement.getAttribute("data-sensor") === "true") {
+
+    html = `
+        <b>Slot ${slotNumber}</b><br><br>
+
+        <img src="${imagePath}"
+             style="
+                width:100%;
+                border-radius:8px;
+                margin-bottom:10px;
+             ">
+
+        Slot Reference Image<br><br>
+
+        Status: Occupied by Sensor
+    `;
+}
+        else if (data.success) {
+            const booking = data.booking;
+
+            html = `
+                <b>Slot ${slotNumber}</b><br><br>
+                Vehicle No:<br>${booking.vehiclePlate}<br><br>
+                Booked By:<br>${booking.userName}<br><br>
+                Email:<br>${booking.userEmail}
+            `;
+        }
+        else {
+           html = `
+			<b>Slot ${slotNumber}</b><br><br>
+
+				<img src="${imagePath}"
+					style="
+					width:100%;
+					border-radius:8px;
+				margin-bottom:10px;
+				">
+
+				Status: Free
+							`;
+        }
+
+        popup.innerHTML = html;
+
+        const rect = slotElement.getBoundingClientRect();
+
+        popup.style.left = (rect.left + window.scrollX + 20) + "px";
+        popup.style.top = (rect.top + window.scrollY + rect.height + 10) + "px";
+
+        popup.style.display = "block";
+
+    } catch (err) {
+        console.log(err);
+        popup.innerHTML = "Error fetching slot info";
+        popup.style.display = "block";
+    }
+}
+
+// CLOSE POPUP WHEN CLICKING OUTSIDE
+document.addEventListener("click", function () {
+    document.getElementById("slot-popup").style.display = "none";
+});
+// ---------------- CANCEL BOOKING ----------------
+document.getElementById('cancel-btn').addEventListener('click', async function () {
+
+    if (!currentSelectedSlot) {
+        alert("Select your booked slot first");
+        return;
+    }
+
+    const loggedInUser =
+        JSON.parse(localStorage.getItem("loggedInUser")) ||
+        JSON.parse(sessionStorage.getItem("loggedInUser"));
+
+    const response = await fetch("/api/bookings/cancel", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            slot: currentSelectedSlot,
+            userEmail: loggedInUser.email
+        })
+    });
+
+    const data = await response.json();
+
+    if (!data.success) {
+        alert(data.message);
+        return;
+    }
+
+    alert("Booking cancelled successfully");
+
+    updateRealTimeSlots();
+
+    currentSelectedSlot = null;
+});
+
+// ---------------- CLEAR BUTTON ----------------
+document.getElementById('clear-btn').addEventListener('click', function() {
+    document.getElementById('display-selected').innerHTML =
+        'Selected Slot <br>(click on green slot to select the slot)';
+
+    document.getElementById('plate-input').value = '';
+    document.getElementById('type-select').selectedIndex = 0;
+
+    setAutomaticTiming();
+
+    for (let i = 1; i <= 5; i++) {
+        document.getElementById(`box-${i}`).style.border = "1px solid black";
+    }
+});
+let user = JSON.parse(localStorage.getItem("loggedInUser")) 
+        || JSON.parse(sessionStorage.getItem("loggedInUser"));
+
+if(!user) {
+    window.location.href = "login.html";
+}
+
+// show user
+document.getElementById("user-display-name").innerText = user.name;
+document.getElementById("user-display-email").innerText = user.email;
+document.querySelector('.logout-btn').addEventListener('click', function() {
+    localStorage.removeItem("loggedInUser");
+    sessionStorage.removeItem("loggedInUser");
+    window.location.href = "login.html";
+});
+const adminEmails = [
+    "chauhan82190@gmail.com",
+    "admin2@gmail.com",
+    "admin3@gmail.com",
+    "teacher@gmail.com",
+    "staff@gmail.com"
+];
+
+async function checkAdminAccess() {
+
+    try {
+
+        const response =
+            await fetch(`/api/admin/check/${user.email}`);
+
+        const data =
+            await response.json();
+
+        const isHardcodedAdmin =
+            adminEmails.includes(user.email);
+
+        const isDatabaseAdmin =
+            data.success && data.isAdmin;
+
+        if (!isHardcodedAdmin && !isDatabaseAdmin) {
+
+            document
+                .querySelector(".thirtythree3")
+                .remove();
+        }
+
+    } catch (err) {
+
+        console.log(err);
+
+        if (!adminEmails.includes(user.email)) {
+
+            document
+                .querySelector(".thirtythree3")
+                .remove();
+        }
+    }
+}
+
+checkAdminAccess();
+</script>
+
+<div id="slot-popup" class="slot-popup"></div>
+</body>
+</html>
