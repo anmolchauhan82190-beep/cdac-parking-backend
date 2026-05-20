@@ -512,10 +512,14 @@ app.get("/api/admin/check/:email", async (req, res) => {
     try {
         const email = req.params.email;
 
-        if (email === "chauhan82190@gmail.com") {
-            return res.json({ success: true, isAdmin: true });
-        }
+        const lockedAdmins = [
+    "chauhan82190@gmail.com",
+    "dhaloadrohan@gmail.com"
+];
 
+if (lockedAdmins.includes(email)) {
+    return res.json({ success: true, isAdmin: true });
+}
         const admin = await AdminUser.findOne({ email });
 
         res.json({
