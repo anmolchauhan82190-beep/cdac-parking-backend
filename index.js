@@ -433,8 +433,7 @@ app.get("/api/system/health", async (req, res) => {
                     (Date.now() - new Date(lastUpdate).getTime()) / 1000
                 );
 
-                nodeMcuConnected =
-                    latestFeed.field7 === "1" && secondsOld <= 25;
+                nodeMcuConnected = latestFeed.field7 === "1" && secondsOld <= 35;
             }
 
         } catch (thingSpeakErr) {
@@ -641,7 +640,7 @@ app.post("/api/bookings/admin/release/:id", async (req, res) => {
         });
     }
 });
-// AUTO SYNC THINGSPEAK EVERY 5 SECONDS
+// AUTO SYNC THINGSPEAK EVERY 12 SECONDS (Optimized to prevent network choke)
 setInterval(async () => {
     try {
         const url = `https://api.thingspeak.com/channels/${THINGSPEAK_CHANNEL_ID}/feeds.json?api_key=${THINGSPEAK_READ_API_KEY}&results=1`;
@@ -657,7 +656,7 @@ setInterval(async () => {
             slot3: Number(latestFeed.field3) || 0,
             slot4: Number(latestFeed.field4) || 0,
             slot5: Number(latestFeed.field5) || 0,
-            sensorHealth: latestFeed.field6 || "11111",
+            sensorHealth: latestFeed.field6 ? String(latestFeed.field6).trim() : "11111",
             nodeHealth: latestFeed.field7 || "0",
             updatedAt: Date.now()
         };
@@ -665,25 +664,17 @@ setInterval(async () => {
         const existing = await SensorStatus.findOne();
 
         if (existing) {
-            existing.slot1 = sensorData.slot1;
-            existing.slot2 = sensorData.slot2;
-            existing.slot3 = sensorData.slot3;
-            existing.slot4 = sensorData.slot4;
-            existing.slot5 = sensorData.slot5;
-            existing.sensorHealth = sensorData.sensorHealth;
-            existing.nodeHealth = sensorData.nodeHealth;
-            existing.updatedAt = Date.now();
-
+            Object.assign(existing, sensorData);
             await existing.save();
         } else {
             await SensorStatus.create(sensorData);
         }
 
-        console.log("ThingSpeak auto synced");
+        console.log("ThingSpeak auto synced cleanly");
     } catch (err) {
-        console.log("ThingSpeak auto sync failed");
+        console.log("ThingSpeak auto sync fetch deferred");
     }
-}, 5000);
+}, 12000);
 // START SERVER
 const PORT = process.env.PORT || 5000;
 
