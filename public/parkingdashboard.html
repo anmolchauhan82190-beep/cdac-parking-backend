@@ -861,7 +861,7 @@ setInterval(updateRealTimeSlots, 3000);
 
 // ---------------- CONFIRM BOOKING ----------------
 document.getElementById('confirm-btn').addEventListener('click', async function () {
-    const plate = document.getElementById('plate-input').value;
+    const plate = document.getElementById('plate-input').value.toUpperCase().replace(/\s+/g, "");
 	const vehicleType = document.getElementById('type-select').value;
 const startTime = document.getElementById('start-time-input').value;
 const endTime = document.getElementById('end-time-input').value;
@@ -874,6 +874,13 @@ const endTime = document.getElementById('end-time-input').value;
         alert("Select slot + enter plate number");
         return;
     }
+	const indianPlateRegex = /^[A-Z]{2}[0-9]{1,2}[A-Z]{1,3}[0-9]{4}$/;
+
+if (!indianPlateRegex.test(plate)) {
+    alert("Enter a valid Indian vehicle number. Example: HP37A1234 or DL01AB1234");
+    return;
+}
+
 	const bookingResponse = await fetch("/api/bookings/create", {
     method: "POST",
     headers: {
