@@ -58,10 +58,16 @@
 }
 
 .thirtytree2:hover,
-.thirtythree3:hover {
-    color: #38bdf8;
+.thirtythree3:hover,
+.thirtythree4:hover {
+    color: #3b82f6 !important;
 }
-
+.thirtythree4 {
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
 /* ACTIVE ADMIN */
 .clicked-effect {
     color: #ef4444;
@@ -625,13 +631,24 @@ button.refresh-btn {
 /* ===== RESPONSIVE FIX FOR MOBILE / TABLET / LAPTOP ===== */
 html,
 body {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background:
+    radial-gradient(circle at top,
+    #1e3a8a 0%,
+    #0f172a 45%,
+    #020617 100%);
+
+    background-attachment: fixed;
+    color: #e5e7eb;
 }
 
-* {
-    box-sizing: border-box;
+/* Top Header */
+.hundered1 {
+    background-color:  rgba(15, 23, 42, 0.88);
+    border: none;
 }
 
 img {
@@ -772,7 +789,9 @@ img {
         <div class="thirtytree2">
             <i class="fa fa-ticket"></i> Dashboard
         </div>
-
+		<div class="thirtythree4" onclick="window.location.href='about.html'">
+			<i class="fa fa-info-circle"></i> About Us
+		</div>
         <div class="thirtythree3 clicked-effect">
             <i class="fa fa-shield"></i> Admin
         </div>
